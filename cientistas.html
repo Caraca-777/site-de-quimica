@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cientistas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        header {
+            background-color: #6cb2e0;
+            color: rgba(255, 255, 255, 0.562);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .logo a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .logo i {
+            font-size: 30px;
+            margin-right: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .search-and-filter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            width: 300px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            font-size: 16px;
+        }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .filter-buttons button {
+            padding: 6px 10px;
+            border: 1px solid;
+            border-radius: 4px;
+            background-color: #6cb2e0;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .filter-buttons button:hover {
+            background-color: #4a8fc4;
+        }
+        .light-mode .filter-buttons button {
+            border-color: #6cb2e0;
+            background-color: #6cb2e0;
+            color: white;
+        }
+        .dark-mode .filter-buttons button {
+            border-color: #4a8fc4;
+            background-color: #4a8fc4;
+            color: #ffffff;
+        }
+        .scientist-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .scientist {
+            text-align: center;
+            width: 150px;
+        }
+        .scientist img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #333;
+        }
+        .scientist p {
+            margin: 10px 0 0;
+            font-size: 16px;
+        }
+        .mode-icon {
+            cursor: pointer;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+        }
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+        .light-mode header {
+            background-color: #333;
+            color: white;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        .dark-mode header {
+            background-color: #6cb2e0;
+            color: rgba(255, 255, 255, 0.562);
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+<header>
+    <div class="logo">
+        <a href="index.html"><i class="fas fa-flask"></i> Voltar para Elementos Químicos</a>
+    </div>
+    <nav>
+        <a href="#home">Início</a>
+        <a href="#scientists">Cientistas</a>
+        <a href="#contact">Contato</a>
+    </nav>
+    <button class="mode-icon" onclick="toggleMode()">🌙</button> <!-- Ícone para trocar tema -->
+</header>
+
+<div class="scientists">
+    <h2>Cientistas</h2>
+    <div class="search-and-filter">
+        <input type="text" id="search-box" class="search-box" placeholder="Buscar cientistas...">
+        <div class="filter-buttons">
+            <button onclick="filterByLetter('A')">A</button>
+            <button onclick="filterByLetter('B')">B</button>
+            <button onclick="filterByLetter('C')">C</button>
+            <button onclick="filterByLetter('D')">D</button>
+            <button onclick="filterByLetter('E')">E</button>
+            <button onclick="filterByLetter('F')">F</button>
+            <button onclick="filterByLetter('G')">G</button>
+            <button onclick="filterByLetter('H')">H</button>
+            <button onclick="filterByLetter('I')">I</button>
+            <button onclick="filterByLetter('J')">J</button>
+            <button onclick="filterByLetter('K')">K</button>
+            <button onclick="filterByLetter('L')">L</button>
+            <button onclick="filterByLetter('M')">M</button>
+            <button onclick="filterByLetter('N')">N</button>
+            <button onclick="filterByLetter('O')">O</button>
+            <button onclick="filterByLetter('P')">P</button>
+            <button onclick="filterByLetter('Q')">Q</button>
+            <button onclick="filterByLetter('R')">R</button>
+            <button onclick="filterByLetter('S')">S</button>
+            <button onclick="filterByLetter('T')">T</button>
+            <button onclick="filterByLetter('U')">U</button>
+            <button onclick="filterByLetter('V')">V</button>
+            <button onclick="filterByLetter('W')">W</button>
+            <button onclick="filterByLetter('X')">X</button>
+            <button onclick="filterByLetter('Y')">Y</button>
+            <button onclick="filterByLetter('Z')">Z</button>
+            <button onclick="showAll()">Todos</button>
+        </div>
+    </div>
+    <div id="scientist-list" class="scientist-list">
+        <!-- Lista de cientistas será gerada aqui -->
+    </div>
+</div>
+
+<script>
+    const scientists = [
+        { name: 'Ada Lovelace', letter: 'A', img: 'Fotos/ada_lovelace.jpg' },
+        { name: 'Albert Einstein', letter: 'A', img: 'Fotos/albert_einstein.jpg' },
+        { name: 'Barbara McClintock', letter: 'B', img: 'Fotos/barbara_mcclintock.jpg' },
+        { name: 'Blaise Pascal', letter: 'B', img: 'Fotos/blaise_pascal.jpg' },
+        { name: 'Carl Sagan', letter: 'C', img: 'Fotos/carl_sagan.jpg' },
+        { name: 'Charles Darwin', letter: 'C', img: 'Fotos/charles_darwin.jpg' },
+        { name: 'David Attenborough', letter: 'D', img: 'Fotos/david_attenborough.jpg' },
+        { name: 'Dmitri Mendeleev', letter: 'D', img: 'Fotos/dmitri_mendeleev.jpg' },
+        // Adicione os outros cientistas aqui
+    ];
+
+    function displayScientists(filteredScientists) {
+        const listContainer = document.getElementById('scientist-list');
+        listContainer.innerHTML = '';
+        filteredScientists.forEach(scientist => {
+            const scientistDiv = document.createElement('div');
+            scientistDiv.className = 'scientist';
+            scientistDiv.innerHTML = `
+                <img src="${scientist.img}" alt="${scientist.name}">
+                <p>${scientist.name}</p>
+            `;
+            listContainer.appendChild(scientistDiv);
+        });
+    }
+
+    function filterByLetter(letter) {
+        const filteredScientists = scientists.filter(scientist => scientist.letter === letter);
+        displayScientists(filteredScientists);
+    }
+
+    function showAll() {
+        displayScientists(scientists);
+    }
+
+    document.getElementById('search-box').addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const filteredScientists = scientists.filter(scientist => 
+            scientist.name.toLowerCase().includes(query)
+        );
+        displayScientists(filteredScientists);
+    });
+
+    function toggleMode() {
+        const body = document.body;
+        const button = document.querySelector('.mode-icon');
+        
+        if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            button.textContent = '☀️';  // Muda para ícone de sol no modo escuro
+        } else {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            button.textContent = '🌙';  // Muda para ícone de lua no modo claro
+        }
+    }
+
+    // Inicializar a lista de cientistas com todos os cientistas
+    showAll();
+</script>
+
+</body>
+</html>
